@@ -1,3 +1,16 @@
+/*Test task WA 2021
+Функционал на уровне JS :
+1. Метод для получения списка тегов: todo.getListOfTags()
+2. Метод для установки нового списка тэгов вместо предыдущего: todo.changeListOfTags('tags')
+Пример: todo.changeListOfTags('car man boy video')
+3. Метод для добавления тега:   addTagsFromList([tags])
+Пример: todo.addTagsFromList(['red', 'blue', 125, 444])
+4. Метод для создания readonly mode: todo.readonly(mode)
+Пример:
+1 todo.readonly('on') - блокируется возможность изменять тэги
+2 todo.readonly('off') - включается возможность изменять тэги*/
+
+
 let tags = [];
 let tagsFromList = [];
 let tagsArray2 = [];
@@ -131,10 +144,10 @@ const todo = {
     let btn = document.getElementById('add-btn');
     let input = document.getElementById('create-tag');
     if(mode === 'on'){
-      return btn.disabled = true, input.style.cssText = `background: red; border: 2px solid gray`,input.placeholder="", input.readOnly = true, btn.style.cssText = `background: red; border: 2px solid gray; color:white`,document.querySelector('#tags').innerHTML = "",localStorage.clear(); 
+      return btn.disabled = true, input.style.cssText = `background: red; border: 2px solid gray`,input.placeholder="", input.readOnly = true, btn.style.cssText = `background: red; border: 2px solid gray; color:white`,document.querySelector('#tags').innerHTML = "",localStorage.clear()
     } 
     if(mode === 'off'){
-      return btn.disabled = false, input.style.cssText = ``, input.placeholder="Add tags",input.readOnly = false, btn.style.cssText = ``,document.querySelector('#tags').innerHTML = "" 
+      return btn.disabled = false, input.style.cssText = ``, input.placeholder="Add tags",input.readOnly = false, btn.style.cssText = ``,document.querySelector('#tags').innerHTML = "",tags = [] 
     }
   },
   getListOfTags(){
