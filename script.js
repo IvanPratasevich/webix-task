@@ -1,15 +1,14 @@
 /*Test task WA 2021
-Теги можно вводить через пробел
 Функционал на уровне JS :
-1. Метод для получения списка тегов: todo.getListOfTags()
-2. Метод для установки нового списка тэгов вместо предыдущего: todo.changeListOfTags('tags')
-Пример: todo.changeListOfTags('car man boy video')
-3. Метод для добавления тега:   addTagsFromList([tags])
-Пример: todo.addTagsFromList(['red', 'blue', 125, 444])
-4. Метод для создания readonly mode: todo.readonly(mode)
+1. Метод для получения списка тегов: todo.getListOfTags
+2. Метод для установки нового списка тэгов вместо предыдущего: todo.changeListOfTags = "tags"
+Пример: todo.changeListOfTags = "a b c d"
+3. Метод для добавления тега:   todo.addTagsFromList([tags])
+Пример: todo.addTagsFromList = "boy red apple 125"
+4. Метод для создания readonly mode: todo.readonly = mode
 Пример:
-1 todo.readonly('on') - блокируется возможность изменять тэги
-2 todo.readonly('off') - включается возможность изменять тэги*/
+1 todo.readonly = 'on' - блокируется возможность изменять тэги
+2 todo.readonly ='off' - включается возможность изменять тэги*/
 
 
 let tags = [];
@@ -109,17 +108,18 @@ const todo = {
       this.create(tagsArray)
     }
   },
-  changeListOfTags(values) {
+  set changeListOfTags(values) {
     document.querySelector('#tags').innerHTML = '';
     tagsArray = values.split(' ');
     tagsArray2 = tagsArray;
     localStorage.setItem('todo', JSON.stringify(tagsArray));
-    this.addTagsFromList(tagsArray);
+    this.createTagsFromList(tagsArray);
   },
-  addTagsFromList(tagsArray) {
+  set addTagsFromList(tagsArray) {
     localStorage.clear();
     localStorage.setItem('todo', JSON.stringify(tagsArrayLocalStorage))
-    this.createTagsFromList(tagsArray);
+    tagsArray = tagsArray.split(' ');
+    this.create(tagsArray);
   },
   createTagsFromList(tagsArray) {
     tagsArray.forEach(function(item, i, arr) {
@@ -141,7 +141,7 @@ const todo = {
     localStorage.setItem('todo', JSON.stringify(tagsFromList));
     tagsFromList = [];
   },
-  readonly(mode){
+  set readonly(mode){
     let btn = document.getElementById('add-btn');
     let input = document.getElementById('create-tag');
     if(mode === 'on'){
@@ -151,9 +151,9 @@ const todo = {
       return btn.disabled = false, input.style.cssText = ``, input.placeholder="Add tags",input.readOnly = false, btn.style.cssText = ``,document.querySelector('#tags').innerHTML = "",tags = [] 
     }
   },
-  getListOfTags(){
+  get getListOfTags(){
     let listOfTags = JSON.parse(localStorage.getItem('todo'));
-    console.log(listOfTags) 
+    return console.log(listOfTags) 
   }
 };
 todo.init()
